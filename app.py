@@ -29,8 +29,14 @@ for i in loopable_columns:
     dit_inputs[i].sort()
     dit_inputs[i].insert(0, "All")
 
-
-# with st.form("Specs_Data"):
+# Session creation function
+def session_selectbox(label, options, key, placeholder="Choose one:"):
+    # If the current session value is not in options, reset to first option
+    if key not in st.session_state or st.session_state[key] not in options:
+        st.session_state[key] = options[0]
+    selected = st.selectbox(label, options, index=options.index(st.session_state[key]), placeholder=placeholder)
+    st.session_state[key] = selected
+    return selected
 
 class Pages:
     # First page
@@ -39,18 +45,18 @@ class Pages:
         name = st.text_input("Enter your Name: ")
 
         # Select Laptop Company
-        company = st.selectbox("Select the Company: ", dit_inputs["Company"], index=0, placeholder="Choose one:")
+        company = session_selectbox("Select the Company:", dit_inputs["Company"], "Company")
 
         # Select Laptop Type
-        type = st.selectbox("Select the Product Type: ", dit_inputs["TypeName"], index=0, placeholder="Choose one:")
+        type = session_selectbox("Select the Product Type:", dit_inputs["TypeName"], "TypeName")
 
     # Second page
     def page2(self):
         # Select OS Type
-        operating_system = st.selectbox("Select Operating System: ", dit_inputs["OpSys"], index=0, placeholder="Choose one:")
+        operating_system = session_selectbox("Select Operating System:", dit_inputs["OpSys"], "OpSys")
         
         # Select CPU Company
-        cpu_company = st.selectbox("Select CPU Company: ", dit_inputs["CPU_Company"], index=0, placeholder="Choose one:")
+        cpu_company = session_selectbox("Select CPU Company:", dit_inputs["CPU_Company"], "CPU_Company")
 
         # Select Frequency Range
         frequency_categories = {
@@ -59,8 +65,9 @@ class Pages:
             "Average Frequency (Below 2.8 Ghz)": "Average Frequency",
             "High Frequency (2.8 & above)": "High Frequency"
         }
-        frequency_display = st.selectbox("Select CPU Frequency Category:",list(frequency_categories.keys()),index=0,placeholder="Choose one:")
-        frequency_category = frequency_categories[frequency_display]
+        frequency_display = session_selectbox("Select CPU Frequency Category:", list(frequency_categories.keys()), "Frequency_Category")
+        st.session_state["Frequency_Category"] = frequency_categories[frequency_display]
+        
 
     # Third page
     def page3(self):
@@ -71,8 +78,8 @@ class Pages:
             "Average RAM (Below 16 Gb)": "Average RAM",
             "High RAM (16 Gb & above)": "High RAM"
         }
-        ram_display = st.selectbox("Select RAM Category:",list(ram_categories.keys()),index=0,placeholder="Choose one:")
-        ram_category = ram_categories[ram_display]
+        ram_display = session_selectbox("Select RAM Category:", list(ram_categories.keys()), "RAM_Category")
+        st.session_state["RAM_Category"] = ram_categories[ram_display] 
 
         # Select Memory Range
         memory_categories = {
@@ -81,20 +88,20 @@ class Pages:
             "Average Memory (Below 1024 Gb)": "Average Memory",
             "High Memory (1024 Gb & above)": "High Memory"
         }
-        memory_display = st.selectbox("Select Memory Category:",list(memory_categories.keys()),index=0,placeholder="Choose one:")
-        memory_category = memory_categories[memory_display]
+        memory_display = session_selectbox("Select Memory Category:",list(memory_categories.keys()), "Memory_Category")
+        st.session_state["Memory_Category"] = memory_categories[memory_display]
 
         # Select GPU Company
-        gpu_company = st.selectbox("Select GPU Company: ", dit_inputs["GPU_Company"], index=0, placeholder="Choose one:")
+        gpu_company = session_selectbox("Select GPU Company: ", dit_inputs["GPU_Company"], "GPU_Company")
 
     # Fourth page
     def page4(self):
         # Select Screen Type
         dit_inputs["ScreenType"].remove("Touchscreen")
-        screen_type = st.selectbox("Select the Screen Type: ", dit_inputs["ScreenType"], index=0, placeholder="Choose one:")
+        screen_type = session_selectbox("Select the Screen Type: ", dit_inputs["ScreenType"], "ScreenType")
 
         # Select Touch Screen or not
-        touch_screen = st.selectbox("Touch Screen: ", dit_inputs["TouchScreen"], index=0, placeholder="Choose one:")
+        touch_screen = session_selectbox("Touch Screen: ", dit_inputs["TouchScreen"], "TouchScreen")
         
         # Select Price Range
         price_categories = {
@@ -103,26 +110,33 @@ class Pages:
             "Average Price (Below ₹70,000)": "Average Budget",
             "High Price (₹70,000 & above)": "High Budget"
         }
-        price_display = st.selectbox("Select Price Category:",list(price_categories.keys()),index=0,placeholder="Choose one:")
-        price_category = price_categories[price_display]
+        price_display = session_selectbox("Select Price Category:",list(price_categories.keys()), "Price_Category")
+        st.session_state["Price_Category"] = price_categories[price_display]
 
-# Submit button
-if st.form_submit_button("Search"):
-    # User data collection listed
-    user_data = [company, type, operating_system, cpu_company, frequency_category, ram_category, memory_category, gpu_company, screen_type, touch_screen, price_category]
+        # Search button
+        if st.button("Search"):
+            # User data collection listed
+            user_data = [st.session_state["Company"], st.session_state["TypeName"], st.session_state["ScreenType"], st.session_state["TouchScreen"], st.session_state["CPU_Company"], st.session_state["Frequency_Category"], st.session_state["RAM_Category"], st.session_state["Memory_Category"], st.session_state["GPU_Company"], st.session_state["OpSys"], st.session_state["Price_Category"]]
 
-    # Dataset copied
-    result = df.copy()
-    
-    # Search function
-    for col,val in zip(required_columns,user_data):
-        if val != "All":
-            result = result[result[col] == val]
-    
-    result = result[["Company", "Product", "TypeName", "OpSys", "CPU_Company", "CPU_Type", "Frequency_GHz", "RAM_GB", "Memory", "Total_Memory", "GPU_Company", "GPU_Type", "ScreenResolution", "ScreenType", "TouchScreen", "Inches", "Weight_kg", "Price_Rs"]]
+            # Dataset copied
+            result = df.copy()
+            
+            # Search function
+            for col,val in zip(required_columns,user_data):
+                if val != "All":
+                    result = result[result[col] == val]
+            
+            result = result[["Company", "Product", "TypeName", "OpSys", "CPU_Company", "CPU_Type", "Frequency_GHz", "RAM_GB", "Memory", "Total_Memory", "GPU_Company", "GPU_Type", "ScreenResolution", "ScreenType", "TouchScreen", "Inches", "Weight_kg", "Price_Rs"]]
 
-    # Session storing of results
-    st.session_state["search_result"] = result
+            # Session storing of results
+            st.session_state["search_result"] = result
+
+# Calling Pages
+page_calls = Pages()
+page_calls.page1()
+page_calls.page2()
+page_calls.page3()
+page_calls.page4()
 
 # Search result display
 if "search_result" in st.session_state:
