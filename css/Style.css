@@ -1,0 +1,17 @@
+.stAppHeader {
+    visibility: hidden;
+    height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.stMainBlockContainer {
+    padding: 0 200px;
+    height: 100vh;
+    max-height: 100vh;
+    /* background-image: url("/Images/Bg3.jpeg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; */
+}
