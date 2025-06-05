@@ -10,7 +10,6 @@ df = pd.read_csv(r"Dataset\Laptop_Price_Improved.csv")
 
 # Displaying the dataset
 st.title("Laptop Price Analyzer!")
-st.write(df.head())
 
 # Dataset Columns:
 all_columns = ["Company", "Product", "TypeName", "Inches", "ScreenResolution", "ScreenType", "TouchScreen", "CPU_Company", "CPU_Type", "Frequency_GHz", "Frequency_Category", "RAM_GB", "RAM_Category", "Memory", "Total_Memory", "Memory_Category", "GPU_Company", "GPU_Type", "OpSys", "Weight_kg", "Price_Rs", "Price_Category"]
@@ -38,14 +37,10 @@ with st.form("Specs_Data"):
     # Select Laptop Type
     type = st.selectbox("Select the Product Type: ", dit_inputs["TypeName"], index=0, placeholder="Choose one:")
 
-    # Select Screen Type
-    dit_inputs["ScreenType"].remove("Touchscreen")
-    screen_type = st.selectbox("Select the Screen Type: ", dit_inputs["ScreenType"], index=0, placeholder="Choose one:")
+    # Select OS Type
+    operating_system = st.selectbox("Select Operating System: ", dit_inputs["OpSys"], index=0, placeholder="Choose one:")
 
-    # Select Touch Screen or not
-    touch_screen = st.selectbox("Touch Screen: ", dit_inputs["TouchScreen"], index=0, placeholder="Choose one:")
-
-    # Select CPU Company
+     # Select CPU Company
     cpu_company = st.selectbox("Select CPU Company: ", dit_inputs["CPU_Company"], index=0, placeholder="Choose one:")
 
     # Select Frequency Range
@@ -81,15 +76,19 @@ with st.form("Specs_Data"):
     # Select GPU Company
     gpu_company = st.selectbox("Select GPU Company: ", dit_inputs["GPU_Company"], index=0, placeholder="Choose one:")
 
-    # Select OS Type
-    operating_system = st.selectbox("Select Operating System: ", dit_inputs["OpSys"], index=0, placeholder="Choose one:")
+    # Select Screen Type
+    dit_inputs["ScreenType"].remove("Touchscreen")
+    screen_type = st.selectbox("Select the Screen Type: ", dit_inputs["ScreenType"], index=0, placeholder="Choose one:")
 
+    # Select Touch Screen or not
+    touch_screen = st.selectbox("Touch Screen: ", dit_inputs["TouchScreen"], index=0, placeholder="Choose one:")
+    
     # Select Price Range
     price_categories = {
         "All": "All",
-        "Low Price (Below ₹40,000)": "Low Price",
-        "Average Price (Below ₹70,000)": "Average Price",
-        "High Price (₹70,000 & above)": "High Price"
+        "Low Price (Below ₹40,000)": "Low Budget",
+        "Average Price (Below ₹70,000)": "Average Budget",
+        "High Price (₹70,000 & above)": "High Budget"
     }
     price_display = st.selectbox("Select Price Category:",list(price_categories.keys()),index=0,placeholder="Choose one:")
     price_category = price_categories[price_display]
@@ -97,7 +96,7 @@ with st.form("Specs_Data"):
     # Submit button
     if st.form_submit_button("Search"):
         # User data collection listed
-        user_data = [company, type, screen_type, touch_screen, cpu_company, frequency_category, ram_category, memory_category, gpu_company, operating_system, price_category]
+        user_data = [company, type, operating_system, cpu_company, frequency_category, ram_category, memory_category, gpu_company, screen_type, touch_screen, price_category]
 
         # Dataset copied
         result = df.copy()
@@ -106,10 +105,19 @@ with st.form("Specs_Data"):
         for col,val in zip(required_columns,user_data):
             if val != "All":
                 result = result[result[col] == val]
+        
+        result = result[["Company", "Product", "TypeName", "OpSys", "CPU_Company", "CPU_Type", "Frequency_GHz", "RAM_GB", "Memory", "Total_Memory", "GPU_Company", "GPU_Type", "ScreenResolution", "ScreenType", "TouchScreen", "Inches", "Weight_kg", "Price_Rs"]]
 
-        # Search result display
-        if result.empty:
-            st.warning("No laptops match your search criteria.")
-        else:
-            result = result[["Company", "Product", "TypeName", "OpSys", "CPU_Company", "CPU_Type", "Frequency_GHz", "RAM_GB", "Memory", "Total_Memory", "GPU_Company", "GPU_Type", "ScreenResolution", "ScreenType", "TouchScreen", "Inches", "Weight_kg", "Price_Rs"]]
-            st.write(result)
+        # Session storing of results
+        st.session_state["search_result"] = result
+
+# Search result display
+if "search_result" in st.session_state:
+    result = st.session_state["search_result"]
+    if result.empty:
+        st.warning("No laptops match your search criteria.")
+        if st.button("Random 5"):
+            st.write(df.sample(n=5))
+    else:
+        st.success("Laptops Based on your Search:")
+        st.write(result)
