@@ -49,16 +49,34 @@ with st.form("Specs_Data"):
     cpu_company = st.selectbox("Select CPU Company: ", dit_inputs["CPU_Company"], index=0, placeholder="Choose one:")
 
     # Select Frequency Range
-    frequency_categories = ["All", "Low Frequency (Below 1.8 Ghz)", "Average Frequency (Below 2.8 Ghz)", "High Frequency (2.8 & above)"]
-    frequency_category = st.selectbox("Select CPU Frequency Category: ", frequency_categories, index=0, placeholder="Choose one:")
+    frequency_categories = {
+        "All": "All",
+        "Low Frequency (Below 1.8 Ghz)": "Low Frequency",
+        "Average Frequency (Below 2.8 Ghz)": "Average Frequency",
+        "High Frequency (2.8 & above)": "High Frequency"
+    }
+    frequency_display = st.selectbox("Select CPU Frequency Category:",list(frequency_categories.keys()),index=0,placeholder="Choose one:")
+    frequency_category = frequency_categories[frequency_display]
 
     # Select RAM Range
-    ram_categories = ["All","Low RAM (Below 4 Gb)", "Average RAM (Below 16 Gb)","High RAM (16 Gb & above)"]
-    ram_category = st.selectbox("Select RAM Category: ", ram_categories, index=0, placeholder="Choose one:")
+    ram_categories = {
+        "All": "All",
+        "Low RAM (Below 4 Gb)": "Low RAM",
+        "Average RAM (Below 16 Gb)": "Average RAM",
+        "High RAM (16 Gb & above)": "High RAM"
+    }
+    ram_display = st.selectbox("Select RAM Category:",list(ram_categories.keys()),index=0,placeholder="Choose one:")
+    ram_category = ram_categories[ram_display]
 
     # Select Memory Range
-    memory_categories = ["All", "Low Memory (Below 512 Gb)", "Average Memory (Below 1024 Gb)", "High Memory (1024 Gb & above)"]
-    memory_category = st.selectbox("Select Memory Category: ", memory_categories, index=0, placeholder="Choose one:")
+    memory_categories = {
+        "All": "All",
+        "Low Memory (Below 512 Gb)": "Low memory",
+        "Average Memory (Below 1024 Gb)": "Average memory",
+        "High Memory (1024 Gb & above)": "High memory"
+    }
+    memory_display = st.selectbox("Select Memory Category:",list(memory_categories.keys()),index=0,placeholder="Choose one:")
+    memory_category = memory_categories[memory_display]
 
     # Select GPU Company
     gpu_company = st.selectbox("Select GPU Company: ", dit_inputs["GPU_Company"], index=0, placeholder="Choose one:")
@@ -67,10 +85,18 @@ with st.form("Specs_Data"):
     operating_system = st.selectbox("Select Operating System: ", dit_inputs["OpSys"], index=0, placeholder="Choose one:")
 
     # Select Price Range
-    price_categories = ["All", "Low Price (Below ₹40,000)", "Average Price (Below ₹70,000)", "High Price (₹70,000 & above)"]
-    price_category = st.selectbox("Select Price Category: ", price_categories, index=0, placeholder="Choose one:")
+    price_categories = {
+        "All": "All",
+        "Low Price (Below ₹40,000)": "Low price",
+        "Average Price (Below ₹70,000)": "Average price",
+        "High Price (₹70,000 & above)": "High price"
+    }
+    price_display = st.selectbox("Select Price Category:",list(price_categories.keys()),index=0,placeholder="Choose one:")
+    price_category = price_categories[price_display]
 
     # Submit button
     if st.form_submit_button("Submit"):
         # User data collection listed
         user_data = [company, type, screen_type, touch_screen, cpu_company, frequency_category, ram_category, memory_category, gpu_company, operating_system, price_category]
+
+        
