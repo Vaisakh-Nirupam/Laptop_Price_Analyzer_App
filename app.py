@@ -71,9 +71,9 @@ with st.form("Specs_Data"):
     # Select Memory Range
     memory_categories = {
         "All": "All",
-        "Low Memory (Below 512 Gb)": "Low memory",
-        "Average Memory (Below 1024 Gb)": "Average memory",
-        "High Memory (1024 Gb & above)": "High memory"
+        "Low Memory (Below 512 Gb)": "Low Memory",
+        "Average Memory (Below 1024 Gb)": "Average Memory",
+        "High Memory (1024 Gb & above)": "High Memory"
     }
     memory_display = st.selectbox("Select Memory Category:",list(memory_categories.keys()),index=0,placeholder="Choose one:")
     memory_category = memory_categories[memory_display]
@@ -87,16 +87,29 @@ with st.form("Specs_Data"):
     # Select Price Range
     price_categories = {
         "All": "All",
-        "Low Price (Below ₹40,000)": "Low price",
-        "Average Price (Below ₹70,000)": "Average price",
-        "High Price (₹70,000 & above)": "High price"
+        "Low Price (Below ₹40,000)": "Low Price",
+        "Average Price (Below ₹70,000)": "Average Price",
+        "High Price (₹70,000 & above)": "High Price"
     }
     price_display = st.selectbox("Select Price Category:",list(price_categories.keys()),index=0,placeholder="Choose one:")
     price_category = price_categories[price_display]
 
     # Submit button
-    if st.form_submit_button("Submit"):
+    if st.form_submit_button("Search"):
         # User data collection listed
         user_data = [company, type, screen_type, touch_screen, cpu_company, frequency_category, ram_category, memory_category, gpu_company, operating_system, price_category]
 
+        # Dataset copied
+        result = df.copy()
         
+        # Search function
+        for col,val in zip(required_columns,user_data):
+            if val != "All":
+                result = result[result[col] == val]
+
+        # Search result display
+        if result.empty:
+            st.warning("No laptops match your search criteria.")
+        else:
+            result = result[["Company", "Product", "TypeName", "OpSys", "CPU_Company", "CPU_Type", "Frequency_GHz", "RAM_GB", "Memory", "Total_Memory", "GPU_Company", "GPU_Type", "ScreenResolution", "ScreenType", "TouchScreen", "Inches", "Weight_kg", "Price_Rs"]]
+            st.write(result)
