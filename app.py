@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 
 # Full page
-st.set_page_config(page_title="LAP", page_icon=r"", layout="wide")
+st.set_page_config(page_title="LPA", page_icon=r"Images\Laptop Price Analyzer Logo.png", layout="wide")
 
 # Adding styles
 with open(r"css\Style.css") as css:
@@ -39,6 +39,10 @@ def session_selectbox(label, options, key, placeholder="Choose one:"):
     return selected
 
 class Pages:
+    # Home page
+    def home():
+        pass
+
     # First page
     def page1(self):
         # Get User Name
@@ -133,10 +137,10 @@ class Pages:
 
 # Calling Pages
 page_calls = Pages()
-page_calls.page1()
-page_calls.page2()
-page_calls.page3()
-page_calls.page4()
+# page_calls.page1()
+# page_calls.page2()
+# page_calls.page3()
+# page_calls.page4()
 
 # Search result display
 if "search_result" in st.session_state:

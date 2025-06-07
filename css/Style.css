@@ -9,9 +9,12 @@
     padding: 0 200px;
     height: 100vh;
     max-height: 100vh;
-    /* background-image: url("/Images/Bg3.jpeg");
+    /* background-image: url("https://github.com/Vaisakh-Nirupam/Laptop_Price_Analyzer_App/blob/main/Images/Bg1.jpg?raw=true"); */
+    /* background-image: url("https://github.com/Vaisakh-Nirupam/Laptop_Price_Analyzer_App/blob/main/Images/Bg2.jpg?raw=true"); */
+    /* background-image: url("https://github.com/Vaisakh-Nirupam/Laptop_Price_Analyzer_App/blob/main/Images/Bg3.jpg?raw=true"); */
+    background-image: url("https://github.com/Vaisakh-Nirupam/Laptop_Price_Analyzer_App/blob/main/Images/Bg4.jpg?raw=true");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed; */
+    background-attachment: fixed;
 }
