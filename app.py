@@ -13,7 +13,7 @@ with open(r"css\Style.css") as css:
 df = pd.read_csv(r"Dataset\Laptop_Price_Improved.csv")
 
 # Displaying the dataset
-st.title("Laptop Price Analyzer!")
+st.image("Images\LPA Title.png")
 
 # Dataset Columns:
 all_columns = ["Company", "Product", "TypeName", "Inches", "ScreenResolution", "ScreenType", "TouchScreen", "CPU_Company", "CPU_Type", "Frequency_GHz", "Frequency_Category", "RAM_GB", "RAM_Category", "Memory", "Total_Memory", "Memory_Category", "GPU_Company", "GPU_Type", "OpSys", "Weight_kg", "Price_Rs", "Price_Category"]
@@ -191,7 +191,7 @@ class Pages:
             st.session_state["Price_Category"] = price_categories[price_display]
 
             # Navigation + Search
-            btn_back, btn_search, err, b = st.columns([1.5, 1.7, 4, 3], vertical_alignment="top")
+            btn_back, btn_search, err, b = st.columns([1.5, 1.8, 4, 3], vertical_alignment="top")
 
             back_clicked = btn_back.button("Back", key="page4_back")
             search_clicked = btn_search.button("Search", key="search_btn")

@@ -34,3 +34,7 @@
 .stDataFrame {
     margin-top: 15px;
 }
+
+[data-testid="stMarkdownContainer"] p {
+    font-size: 17px;
+}
