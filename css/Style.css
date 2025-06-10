@@ -18,3 +18,8 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
+
+[data-testid="stVerticalBlockBorderWrapper"] {
+    padding-top: 16px;
+}
+
