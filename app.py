@@ -74,7 +74,7 @@ class Pages:
             type = session_selectbox("Select the Product Type:", dit_inputs["TypeName"], "TypeName")
 
             # Buttons layout
-            btn_back, btn_next, err, b = st.columns([1.5, 1.5, 4, 3], vertical_alignment="top")
+            btn_back, btn_next, err, b = st.columns([1.5, 1.5, 4.1, 3], vertical_alignment="top")
 
             back_clicked = btn_back.button("Back", key="page1_back")
             next_clicked = btn_next.button("Next", key="page1_next")
@@ -201,50 +201,91 @@ class Pages:
                 st.rerun()
 
             if search_clicked:
-                st.session_state["search"] = True
                 st.session_state.select = "Result"
                 st.rerun()
 
     # Result page
     def result(self):
-        if "search" in st.session_state and st.session_state["search"]:
-            # Reset search
-            st.session_state["search"] = False
 
-            # Collect user data
-            user_data = [st.session_state["Company"], st.session_state["TypeName"], st.session_state["ScreenType"], st.session_state["TouchScreen"], st.session_state["CPU_Company"], st.session_state["Frequency_Category"], st.session_state["RAM_Category"], st.session_state["Memory_Category"], st.session_state["GPU_Company"], st.session_state["OpSys"], st.session_state["Price_Category"]]
+        # Collect user data
+        user_data = [st.session_state["Company"], st.session_state["TypeName"], st.session_state["ScreenType"], st.session_state["TouchScreen"], st.session_state["CPU_Company"], st.session_state["Frequency_Category"], st.session_state["RAM_Category"], st.session_state["Memory_Category"], st.session_state["GPU_Company"], st.session_state["OpSys"], st.session_state["Price_Category"]]
 
-            # Dataset copied
-            result = df.copy()
+        # Dataset copied
+        result = df.copy()
 
-            # Apply filters
-            for col, val in zip(required_columns, user_data):
-                if val != "All":
-                    result = result[result[col] == val]
+        # Apply filters
+        for col, val in zip(required_columns, user_data):
+            if val != "All":
+                result = result[result[col] == val]
 
-            # Reduce columns for display
-            result = result[["Company", "Product", "TypeName", "OpSys", "CPU_Company", "CPU_Type", "Frequency_GHz", "RAM_GB", "Memory", "Total_Memory", "GPU_Company", "GPU_Type", "ScreenResolution", "ScreenType", "TouchScreen", "Inches", "Weight_kg", "Price_Rs"]]
+        # Reduce columns for display
+        result = result[["Company", "Product", "TypeName", "OpSys", "CPU_Company", "CPU_Type", "Frequency_GHz", "RAM_GB", "Memory", "Total_Memory", "GPU_Company", "GPU_Type", "ScreenResolution", "ScreenType", "TouchScreen", "Inches", "Weight_kg", "Price_Rs"]]
 
-            # Display results
-            name = st.session_state["name"]
-            st.title(f"Hello {name}!")
+        # Display results
+        b1,txt1,b2 = st.columns([1,10,4.7])
+        name = st.session_state["name"]
+        txt1.title(f"Hello {name}!")
 
-            if result.empty:
-                st.subheader("No laptops match your search criteria.")
-                st.subheader("Here's a list of 5 random laptops for your reference:")
-                st.dataframe(df.sample(n=5), use_container_width=True, height=250)
-            else:
-                st.subheader("The Laptops based on your search are ready!")
-                st.dataframe(result, use_container_width=True, height=300)
+        if result.empty:
+            b1, txt2, btn1, btn2, btn3, b2 = st.columns([1, 10, 1.2, 1.2, 1.8, 0.5], vertical_alignment="center")
+
+            txt2.subheader("No laptops match your search criteria.\nHere's a list of 5 random laptops for your reference:")
+
+            # Random 5 logic
+            if "random_laptops" not in st.session_state:
+                st.session_state["random_laptops"] = df.sample(n=5)
+
+            # Handle button clicks
+            if btn1.button("Back", key="result_back"):
+                st.session_state.select = "Page 4"
+                st.rerun()
+
+            if btn2.button("Home", key="home_btn"):
+                keys_to_reset = ["name", "Company", "TypeName", "ScreenType", "TouchScreen", "CPU_Company",
+                                "Frequency_Category", "RAM_Category", "Memory_Category", "GPU_Company",
+                                "OpSys", "Price_Category"]
+                for key in keys_to_reset:
+                    st.session_state.pop(key, None)
+                st.session_state.select = "Home"
+                st.rerun()
+
+            if btn3.button("Random 5", key="random_btn"):
+                st.session_state["random_laptops"] = df.sample(n=5)
+                st.rerun()
+
+            # Show random laptops
+            st.dataframe(st.session_state["random_laptops"], use_container_width=True, height=250)
+
+        else:
+            b1, txt2, btn1, btn2, b2 = st.columns([1, 10, 1.2, 1.2, 1], vertical_alignment="center")
+
+            txt2.subheader("The laptops based on your search are ready!")
+
+            if btn1.button("Back", key="result_back"):
+                st.session_state.select = "Page 4"
+                st.rerun()
+
+            if btn2.button("Home", key="home_btn"):
+                keys_to_reset = ["name", "Company", "TypeName", "ScreenType", "TouchScreen", "CPU_Company",
+                                "Frequency_Category", "RAM_Category", "Memory_Category", "GPU_Company",
+                                "OpSys", "Price_Category"]
+                for key in keys_to_reset:
+                    st.session_state.pop(key, None)
+                st.session_state.select = "Home"
+                st.rerun()
+
+            st.dataframe(result, use_container_width=True, height=275)
   
 
 # Calling Pages
 page_calls = Pages()
 
 # Main Container
-main_container = st.container(height=500,border=True)
+main_container = st.container(height=500, border=True)
 
 with main_container:
+    st.markdown('<div class="main-container">', unsafe_allow_html=True)
+    
     b1,img,b2,intro,b3 = st.columns([0.2,2,0.2,2.5,0.4])
 
     if "select" not in st.session_state:
@@ -263,3 +304,4 @@ with main_container:
     elif st.session_state.select == "Result":
         page_calls.result()
 
+    st.markdown('</div>', unsafe_allow_html=True)
