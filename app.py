@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 
 # Full page
-st.set_page_config(page_title="LPA", page_icon=r"Images\Laptop Price Analyzer Logo.png", layout="wide")
+st.set_page_config(page_title="LPA", page_icon=r"Images\LPA Logo.png", layout="wide")
 
 # Adding styles
 with open(r"css\Style.css") as css:
