@@ -227,9 +227,9 @@ class Pages:
         txt1.title(f"Hello {name}!")
 
         if result.empty:
-            b1, txt2, btn1, btn2, btn3, b2 = st.columns([1, 10, 1.2, 1.2, 1.8, 0.5], vertical_alignment="center")
+            b1, txt2, btn1, btn2, btn3, b2 = st.columns([1.05, 10, 1.2, 1.2, 1.8, 0.4], vertical_alignment="center")
 
-            txt2.subheader("No laptops match your search criteria.\nHere's a list of 5 random laptops for your reference:")
+            txt2.subheader("No laptops match your search criteria.\n Here's a list of 5 random laptops for your reference:")
 
             # Random 5 logic
             if "random_laptops" not in st.session_state:

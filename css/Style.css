@@ -1,3 +1,4 @@
+/* Deploy and Rerun message box hidden */
 .stAppHeader {
     visibility: hidden;
     height: 0;
@@ -5,6 +6,7 @@
     padding: 0;
 }
 
+/* Size adjusted, Background image,  */
 .stMainBlockContainer {
     padding: 0 200px;
     height: 100vh;
@@ -19,26 +21,35 @@
     background-attachment: fixed;
 }
 
+/* Centering the Contents */
 .stMainBlockContainer > [data-testid="stVerticalBlockBorderWrapper"] {
     margin-top: 35px;
 }
 
+/* Unnecessary spacing */
 [data-testid="stHeadingWithActionElements"] h1 {
     padding: 0;
+    color: #D9A7FF;
 }
 
+/* Unnecessary spacing */
 [data-testid="stHeadingWithActionElements"] h3 {
     padding: 0;
+    color: #A0F6FF;
 }
 
+/* Dataframe lift */
 .stDataFrame {
     margin-top: 15px;
 }
 
+/* Font size of write, label, buttons */
 [data-testid="stMarkdownContainer"] p {
     font-size: 17px;
+    color: #f1f1f1;
 }
 
+/* Main container blurry glass effect */
 .stVerticalBlock > [data-testid="stVerticalBlockBorderWrapper"] {
     background: rgba(255, 255, 255, 0.08); 
     padding: 20px;
@@ -48,4 +59,18 @@
     backdrop-filter: blur(12px); 
     -webkit-backdrop-filter: blur(12px); 
     border: 1px solid rgba(255, 255, 255, 0.18); 
+}
+
+/* 
+General Text	#FFFFFF (white) or #F1F1F1	Keep white or light grey for contrast.
+Headings	#00FFFF (Cyan), #66FCF1, #FFDE59	These glow on dark and match cyberpunk theme.
+Buttons Text	#FFFFFF, #EAEAEA, or #00FFC6	Keep contrast with button backgrounds.
+Table Font	#EAEAEA	Not pure white — easier on eyes.
+Welcome Title	#FF6EC7, #00D1FF, or #F72585	Adds vibrance and keeps aesthetic futuristic. 
+*/
+
+h1 {
+    font-family: 'Poppins';
+    color: #00FFFF;
+    /* font-family: 'Poppins', 'Montserrat', or 'Orbitron'; */
 }
