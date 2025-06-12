@@ -229,7 +229,10 @@ class Pages:
         if result.empty:
             b1, txt2, btn1, btn2, btn3, b2 = st.columns([1.05, 10, 1.2, 1.2, 1.8, 0.4], vertical_alignment="center")
 
-            txt2.subheader("No laptops match your search criteria./n Here's a list of 5 random laptops for your reference:")
+            txt2.markdown("""<div style="font-size:28px; font-weight:600;">
+                                <h3>No laptops match your search criteria.</h3>
+                                <p>Here's a list of 5 random laptops for your reference:</p>
+                             </div>""",unsafe_allow_html=True)
 
             # Random 5 logic
             if "random_laptops" not in st.session_state:
