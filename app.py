@@ -3,17 +3,17 @@ import streamlit as st
 import pandas as pd
 
 # Full page
-st.set_page_config(page_title="LPA", page_icon=r"Images\LPA Logo.png", layout="wide")
+st.set_page_config(page_title="LPA", page_icon="Images/LPA Logo.png", layout="wide")
 
 # Adding styles
-with open(r"css\Style.css") as css:
+with open("css/Style.css") as css:
     st.markdown(f"<style>{css.read()}</style>", unsafe_allow_html=True)
 
 # Loading the dataset
-df = pd.read_csv(r"Dataset\Laptop_Price_Improved.csv")
+df = pd.read_csv("Dataset/Laptop_Price_Improved.csv")
 
 # Displaying the dataset
-st.image("Images\LPA Title.png")
+st.image("Images/LPA Title.png")
 
 # Dataset Columns:
 all_columns = ["Company", "Product", "TypeName", "Inches", "ScreenResolution", "ScreenType", "TouchScreen", "CPU_Company", "CPU_Type", "Frequency_GHz", "Frequency_Category", "RAM_GB", "RAM_Category", "Memory", "Total_Memory", "Memory_Category", "GPU_Company", "GPU_Type", "OpSys", "Weight_kg", "Price_Rs", "Price_Category"]
@@ -44,7 +44,7 @@ def session_selectbox(label, options, key, placeholder="Choose one:"):
 class Pages:
     # Home page
     def home(self):
-        img.image("Images\Lap1.jpg")
+        img.image("Images/Lap1.jpg")
 
         with intro:
             st.title("Welcome")
@@ -61,7 +61,7 @@ class Pages:
 
     # First page
     def page1(self):
-        img.image("Images\Lap2.jpg")
+        img.image("Images/Lap2.jpg")
 
         with intro:
             # Get User Name
@@ -92,7 +92,7 @@ class Pages:
 
     # Second page
     def page2(self):
-        img.image("Images\Lap3.jpg")
+        img.image("Images/Lap3.jpg")
 
         with intro:
             # Select OS Type
@@ -127,7 +127,7 @@ class Pages:
 
     # Third page
     def page3(self):
-        img.image("Images\Lap4.jpg")
+        img.image("Images/Lap4.jpg")
 
         with intro:
             # Select RAM Range
@@ -169,7 +169,7 @@ class Pages:
 
     # Fourth page
     def page4(self):
-        img.image("Images\Lap5.jpg")
+        img.image("Images/Lap5.jpg")
 
         with intro:
             # Select Screen Type
@@ -227,9 +227,9 @@ class Pages:
         txt1.title(f"Hello {name}!")
 
         if result.empty:
-            b1, txt2, btn1, btn2, btn3, b2 = st.columns([1.05, 10, 1.2, 1.2, 1.8, 0.4], vertical_alignment="center")
+            b1, txt2, btn1, btn2, btn3, b2 = st.columns([1.05, 10, 1.2, 1.2, 1.8, 0.4], vertical_alignment="cente")
 
-            txt2.subheader("No laptops match your search criteria.\n Here's a list of 5 random laptops for your reference:")
+            txt2.subheader("No laptops match your search criteria./n Here's a list of 5 random laptops for your reference:")
 
             # Random 5 logic
             if "random_laptops" not in st.session_state:
@@ -257,7 +257,7 @@ class Pages:
             st.dataframe(st.session_state["random_laptops"], use_container_width=True, height=250)
 
         else:
-            b1, txt2, btn1, btn2, b2 = st.columns([1, 10, 1.2, 1.2, 1], vertical_alignment="center")
+            b1, txt2, btn1, btn2, b2 = st.columns([1, 10, 1.2, 1.2, 1], vertical_alignment="cente")
 
             txt2.subheader("The laptops based on your search are ready!")
 
@@ -284,7 +284,7 @@ page_calls = Pages()
 main_container = st.container(height=500, border=True)
 
 with main_container:
-    st.markdown('<div class="main-container">', unsafe_allow_html=True)
+    st.markdown('<div class="main-containe">', unsafe_allow_html=True)
     
     b1,img,b2,intro,b3 = st.columns([0.2,2,0.2,2.5,0.4])
 
