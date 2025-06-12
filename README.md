@@ -1,9 +1,15 @@
 # 💻 Laptop Price Analyzer App
 
-An interactive web app built using Streamlit to explore and analyze laptop prices based on features and specifications.
+An interactive web app built using **Streamlit** to explore and analyze laptop prices based on features and specifications.
 
-Built with 🐍 Python, 🧮 Pandas, 📊 EDA, and deployed using 🌐 Streamlit.  
-Created from insights during my EDA research on the Laptop Price Dataset from Kaggle.
+Built with 🐍 **Python**, 🧮 **Pandas**, 📊 **EDA**, and deployed using 🌐 **Streamlit Cloud**.  
+Developed from insights gained during my **Exploratory Data Analysis (EDA)** of the [Laptop Price Dataset on Kaggle](https://www.kaggle.com/datasets/muhammadadiltariq/laptop-prices).
+
+---
+
+## 🌐 Live Demo
+
+🔗 [Try the app now](https://laptop-price-analyzer-app.streamlit.app/)
 
 ---
 
@@ -16,24 +22,25 @@ Created from insights during my EDA research on the Laptop Price Dataset from Ka
 
 ## 🚀 Features
 
-- 🔍 Interactive filtering by brand, CPU, RAM, GPU, and more
-- 🧊 Glassmorphic modern UI with smooth navigation
-- 📊 Real-time laptop display based on user inputs
-- 💡 Smart suggestions when no exact match is found
-- 🧼 Clean and responsive multi-page layout
+- 🔍 Interactive filtering by brand, CPU, RAM, GPU, and more  
+- 🧊 Glassmorphic modern UI with smooth navigation  
+- 📊 Real-time laptop display based on user inputs  
+- 💡 Smart suggestions when no exact match is found  
+- 📑 Multi-page layout for better user experience  
+- 💡 Helpful messages and fallbacks when filters return no results
 
 ---
 
 ## 📦 Tech Stack
 
-- Python  
-- Pandas  
-- Streamlit  
-- CSS (Custom styling)
+- **Python**  
+- **Pandas**  
+- **Streamlit**  
+- **CSS** (Custom Styling)
 
 ---
 
-## ▶️ Run Locally
+## ▶️ How to Run Locally
 
 ```bash
 git clone https://github.com/Vaisakh-Nirupam/Laptop_Price_Analyzer_App.git
