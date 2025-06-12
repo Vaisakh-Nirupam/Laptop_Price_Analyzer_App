@@ -227,7 +227,7 @@ class Pages:
         txt1.title(f"Hello {name}!")
 
         if result.empty:
-            b1, txt2, btn1, btn2, btn3, b2 = st.columns([1.05, 10, 1.2, 1.2, 1.8, 0.4], vertical_alignment="cente")
+            b1, txt2, btn1, btn2, btn3, b2 = st.columns([1.05, 10, 1.2, 1.2, 1.8, 0.4], vertical_alignment="center")
 
             txt2.subheader("No laptops match your search criteria./n Here's a list of 5 random laptops for your reference:")
 
