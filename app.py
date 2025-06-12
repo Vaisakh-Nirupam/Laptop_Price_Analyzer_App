@@ -257,7 +257,7 @@ class Pages:
             st.dataframe(st.session_state["random_laptops"], use_container_width=True, height=250)
 
         else:
-            b1, txt2, btn1, btn2, b2 = st.columns([1, 10, 1.2, 1.2, 1], vertical_alignment="cente")
+            b1, txt2, btn1, btn2, b2 = st.columns([1, 10, 1.2, 1.2, 1], vertical_alignment="center")
 
             txt2.subheader("The laptops based on your search are ready!")
 
