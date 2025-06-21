@@ -286,9 +286,7 @@ page_calls = Pages()
 # Main Container
 main_container = st.container(height=500, border=True)
 
-with main_container:
-    st.markdown('<div class="main-containe">', unsafe_allow_html=True)
-    
+with main_container:    
     b1,img,b2,intro,b3 = st.columns([0.2,2,0.2,2.5,0.4])
 
     if "select" not in st.session_state:
@@ -306,5 +304,3 @@ with main_container:
         page_calls.page4()
     elif st.session_state.select == "Result":
         page_calls.result()
-
-    st.markdown('</div>', unsafe_allow_html=True)
