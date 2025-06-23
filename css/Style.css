@@ -1,0 +1,66 @@
+/* Deploy and Rerun message box hidden */
+.stAppHeader {
+  visibility: hidden;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Size adjusted, Background image,  */
+.stMainBlockContainer {
+  padding: 0 200px;
+  height: 100vh;
+  max-height: 100vh;
+  /* background-image: url("https://github.com/Vaisakh-Nirupam/Laptop_Price_Analyzer_App/blob/main/Images/Bg2.jpg?raw=true"); */
+  /* background-image: url("https://github.com/Vaisakh-Nirupam/Laptop_Price_Analyzer_App/blob/main/Images/Bg3.jpg?raw=true"); */
+  background-image: url("https://github.com/Vaisakh-Nirupam/Laptop_Price_Analyzer_App/blob/main/Images/Bg4.jpg?raw=true");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Centering the Contents */
+.stMainBlockContainer > [data-testid="stVerticalBlockBorderWrapper"] {
+  margin-top: 35px;
+}
+
+/* Unnecessary spacing */
+[data-testid="stHeadingWithActionElements"] h1 {
+  padding: 0;
+  color: #d9a7ff;
+}
+
+/* Unnecessary spacing */
+[data-testid="stHeadingWithActionElements"] h3 {
+  padding: 0;
+  color: #a0f6ff;
+}
+
+/* Dataframe lift */
+.stDataFrame {
+  margin-top: 15px;
+}
+
+/* Font size of write, label, buttons */
+[data-testid="stMarkdownContainer"] p {
+  font-size: 17px;
+  color: #f1f1f1;
+}
+
+/* Main container blurry glass effect */
+.stVerticalBlock > [data-testid="stVerticalBlockBorderWrapper"] {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 20px;
+  border-radius: 16px;
+  color: white;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+h1 {
+  font-family: "Poppins";
+  color: #00ffff;
+}
