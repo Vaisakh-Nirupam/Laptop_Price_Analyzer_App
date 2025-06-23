@@ -46,7 +46,7 @@ class Pages:
     def home(self):
         img.image("Images/Lap1.jpg")
 
-        with intro:
+        with text:
             st.title("Welcome")
             st.write("to the **Laptop Price Analyzer!** Whether you're a student, gamer, or working professional, our intelligent filter system helps you discover the perfect laptop based on your needs — even if you’re not a tech expert!")
             st.write("✔ Easily compare laptops by brand, specs, and price")
@@ -63,7 +63,7 @@ class Pages:
     def page1(self):
         img.image("Images/Lap2.jpg")
 
-        with intro:
+        with text:
             # Get User Name
             st.session_state.name = st.text_input("Enter your Name:", value=st.session_state.name)
 
@@ -94,7 +94,7 @@ class Pages:
     def page2(self):
         img.image("Images/Lap3.jpg")
 
-        with intro:
+        with text:
             # Select OS Type
             operating_system = session_selectbox("Select Operating System:", dit_inputs["OpSys"], "OpSys")
 
@@ -129,7 +129,7 @@ class Pages:
     def page3(self):
         img.image("Images/Lap4.jpg")
 
-        with intro:
+        with text:
             # Select RAM Range
             ram_categories = {
                 "All": "All",
@@ -171,7 +171,7 @@ class Pages:
     def page4(self):
         img.image("Images/Lap5.jpg")
 
-        with intro:
+        with text:
             # Select Screen Type
             if "Touchscreen" in dit_inputs["ScreenType"]:
                 dit_inputs["ScreenType"].remove("Touchscreen")
@@ -286,8 +286,9 @@ page_calls = Pages()
 # Main Container
 main_container = st.container(height=500, border=True)
 
-with main_container:    
-    b1,img,b2,intro,b3 = st.columns([0.2,2,0.2,2.5,0.4])
+with main_container:
+    img, text = st.columns([4.5, 5.5],gap="medium") 
+
 
     if "select" not in st.session_state:
         st.session_state.select = "Home"
