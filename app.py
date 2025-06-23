@@ -12,8 +12,9 @@ with open("css/Style.css") as css:
 # Loading the dataset
 df = pd.read_csv("Dataset/Laptop_Price_Improved.csv")
 
-# Displaying the dataset
-st.image("Images/LPA Title.png")
+# Page Title
+title, _ = st.columns([7,3])
+title.image("Images/LPA Title.png")
 
 # Dataset Columns:
 all_columns = ["Company", "Product", "TypeName", "Inches", "ScreenResolution", "ScreenType", "TouchScreen", "CPU_Company", "CPU_Type", "Frequency_GHz", "Frequency_Category", "RAM_GB", "RAM_Category", "Memory", "Total_Memory", "Memory_Category", "GPU_Company", "GPU_Type", "OpSys", "Weight_kg", "Price_Rs", "Price_Category"]
@@ -74,7 +75,7 @@ class Pages:
             type = session_selectbox("Select the Product Type:", dit_inputs["TypeName"], "TypeName")
 
             # Buttons layout
-            btn_back, btn_next, err, b = st.columns([1.5, 1.5, 4.1, 3], vertical_alignment="top")
+            btn_back, btn_next, err = st.columns([2, 2, 6], vertical_alignment="top")
 
             back_clicked = btn_back.button("Back", key="page1_back")
             next_clicked = btn_next.button("Next", key="page1_next")
@@ -112,7 +113,7 @@ class Pages:
             st.session_state["Frequency_Category"] = frequency_categories[frequency_display]
 
             # Buttons layout inside intro column
-            btn_back, btn_next, err, b = st.columns([1.5, 1.5, 4, 3], vertical_alignment="top")
+            btn_back, btn_next, _ = st.columns([2, 2, 6], vertical_alignment="top")
 
             back_clicked = btn_back.button("Back", key="page2_back")
             next_clicked = btn_next.button("Next", key="page2_next")
@@ -154,7 +155,7 @@ class Pages:
             gpu_company = session_selectbox("Select GPU Company: ", dit_inputs["GPU_Company"], "GPU_Company")
 
             # Buttons for navigation
-            btn_back, btn_next, err, b = st.columns([1.5, 1.5, 4, 3], vertical_alignment="top")
+            btn_back, btn_next, _ = st.columns([2, 2, 6], vertical_alignment="top")
 
             back_clicked = btn_back.button("Back", key="page3_back")
             next_clicked = btn_next.button("Next", key="page3_next")
@@ -191,10 +192,10 @@ class Pages:
             st.session_state["Price_Category"] = price_categories[price_display]
 
             # Navigation + Search
-            btn_back, btn_search, err, b = st.columns([1.5, 1.8, 4, 3], vertical_alignment="top")
+            btn_back, btn_search, _ = st.columns([2, 2, 6], vertical_alignment="top")
 
             back_clicked = btn_back.button("Back", key="page4_back")
-            search_clicked = btn_search.button("Search", key="search_btn")
+            search_clicked = btn_search.button("Find", key="search_btn")
 
             if back_clicked:
                 st.session_state.select = "Page 3"
@@ -222,14 +223,14 @@ class Pages:
         result = result[["Company", "Product", "TypeName", "OpSys", "CPU_Company", "CPU_Type", "Frequency_GHz", "RAM_GB", "Memory", "Total_Memory", "GPU_Company", "GPU_Type", "ScreenResolution", "ScreenType", "TouchScreen", "Inches", "Weight_kg", "Price_Rs"]]
 
         # Display results
-        b1,txt1,b2 = st.columns([1,10,4.7])
+        _, txt, _ = st.columns([2,6,2])
         name = st.session_state["name"]
-        txt1.title(f"Hello {name}!")
+        txt.title(f"Hello {name}!")
 
         if result.empty:
-            b1, txt2, btn1, btn2, btn3, b2 = st.columns([1.05, 10, 1.2, 1.2, 1.8, 0.4], vertical_alignment="center")
+            _, txt, btn1, btn2, btn3, _ = st.columns([1, 5.5, 1, 1, 1.5, 1], vertical_alignment="center", gap="small")
 
-            txt2.markdown("""<div style="font-size:28px; font-weight:600;">
+            txt.markdown("""<div style="font-size:28px; font-weight:600;">
                                 <h3>No laptops match your search criteria.</h3>
                                 <p>Here's a list of 5 random laptops for your reference:</p>
                              </div>""",unsafe_allow_html=True)
@@ -260,9 +261,9 @@ class Pages:
             st.dataframe(st.session_state["random_laptops"], use_container_width=True, height=250)
 
         else:
-            b1, txt2, btn1, btn2, b2 = st.columns([1, 10, 1.2, 1.2, 1], vertical_alignment="center")
+            _, txt, btn1, btn2, _ = st.columns([1, 5, 1, 1, 2], vertical_alignment="center", gap="small")
 
-            txt2.subheader("The laptops based on your search are ready!")
+            txt.subheader("The laptops based on your search are ready!")
 
             if btn1.button("Back", key="result_back"):
                 st.session_state.select = "Page 4"
@@ -284,10 +285,11 @@ class Pages:
 page_calls = Pages()
 
 # Main Container
-main_container = st.container(height=500, border=True)
+main_container = st.container(border=True)
 
 with main_container:    
-    b1,img,b2,intro,b3 = st.columns([0.2,2,0.2,2.5,0.4])
+    img, intro = st.columns([4,4],gap="medium")
+
 
     if "select" not in st.session_state:
         st.session_state.select = "Home"

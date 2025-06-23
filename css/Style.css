@@ -8,32 +8,45 @@
 
 /* Size adjusted, Background image,  */
 .stMainBlockContainer {
-  padding: 0 200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+
   height: 100vh;
   max-height: 100vh;
+
   /* background-image: url("https://github.com/Vaisakh-Nirupam/Laptop_Price_Analyzer_App/blob/main/Images/Bg2.jpg?raw=true"); */
   /* background-image: url("https://github.com/Vaisakh-Nirupam/Laptop_Price_Analyzer_App/blob/main/Images/Bg3.jpg?raw=true"); */
   background-image: url("https://github.com/Vaisakh-Nirupam/Laptop_Price_Analyzer_App/blob/main/Images/Bg4.jpg?raw=true");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: scroll;
 }
 
 /* Centering the Contents */
 .stMainBlockContainer > [data-testid="stVerticalBlockBorderWrapper"] {
-  margin-top: 35px;
+  margin: auto;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.stColumn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Unnecessary spacing */
 [data-testid="stHeadingWithActionElements"] h1 {
-  padding: 0;
+  padding-top: 0;
   color: #d9a7ff;
 }
 
 /* Unnecessary spacing */
 [data-testid="stHeadingWithActionElements"] h3 {
-  padding: 0;
+  padding-top: 0;
   color: #a0f6ff;
 }
 
@@ -51,7 +64,7 @@
 /* Main container blurry glass effect */
 .stVerticalBlock > [data-testid="stVerticalBlockBorderWrapper"] {
   background: rgba(255, 255, 255, 0.08);
-  padding: 20px;
+  padding: 40px;
   border-radius: 16px;
   color: white;
   box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
@@ -62,5 +75,117 @@
 
 h1 {
   font-family: "Poppins";
-  color: #00ffff;
+  color: #2d9595;
+}
+
+/* Responsive Designing */
+
+@media only screen and (max-width: 768px) {
+  .stMainBlockContainer {
+    height: auto;
+    max-height: none;
+  }
+
+  .stMainBlockContainer {
+    /* padding: 0 20px !important; */
+    background-position: center;
+  }
+
+  .stVerticalBlock > [data-testid="stVerticalBlockBorderWrapper"] {
+    padding: 10px;
+  }
+
+  [data-testid="stMarkdownContainer"] > p {
+    font-size: 15px;
+  }
+}
+
+/* Stack layout for tall devices like iPad Pro, Zenbook Fold, Surface Pro */
+@media only screen and (max-width: 1024px) {
+  .stMainBlockContainer {
+    height: auto;
+    max-height: none;
+  }
+
+  .stHorizontalBlock {
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+  }
+
+  .stHorizontalBlock > div {
+    width: 100% !important;
+    flex: 1 1 100% !important;
+  }
+
+  /* ✅ Center the image inside its container */
+  .stHorizontalBlock > div:first-child {
+    display: flex !important;
+    justify-content: center !important;
+    box-sizing: border-box;
+  }
+
+  .stHorizontalBlock img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .stVerticalBlock > [data-testid="stVerticalBlockBorderWrapper"] {
+    padding: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .stVerticalBlock > [data-testid="stVerticalBlockBorderWrapper"] h1 {
+    text-align: center;
+    font-family: 30px;
+  }
+}
+
+/* Desktop default heading sizes */
+[data-testid="stHeadingWithActionElements"] h1 {
+  font-size: 50px;
+  color: #097577;
+}
+
+[data-testid="stHeadingWithActionElements"] h2 {
+  font-size: 28px;
+  color: #097577;
+}
+
+[data-testid="stHeadingWithActionElements"] h3 {
+  font-size: 22px;
+  color: #097577;
+}
+
+/* Responsive for tablet & mobile */
+@media only screen and (max-width: 992px) {
+  [data-testid="stHeadingWithActionElements"] h1 {
+    font-size: 30px;
+  }
+
+  [data-testid="stHeadingWithActionElements"] h2 {
+    font-size: 24px;
+  }
+
+  [data-testid="stHeadingWithActionElements"] h3 {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  [data-testid="stHeadingWithActionElements"] h1 {
+    font-size: 24px;
+  }
+
+  [data-testid="stHeadingWithActionElements"] h2 {
+    font-size: 20px;
+  }
+
+  [data-testid="stHeadingWithActionElements"] h3 {
+    font-size: 18px;
+  }
 }
